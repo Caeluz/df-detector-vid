@@ -7,7 +7,7 @@ from typing import Union, List, Tuple, Dict, Optional
 from collections import defaultdict
 import os
 from tqdm import tqdm
-from deepfake_data import DeepFakeDetector
+from step_04_deepfake_data import DeepFakeDetector
 from facenet_pytorch import MTCNN
 import matplotlib.pyplot as plt
 
@@ -359,14 +359,15 @@ class ImprovedDeepFakePredictor:
 # Example usage
 if __name__ == "__main__":
     predictor = ImprovedDeepFakePredictor(
-        model_path='training_output_test_1/checkpoints/best_model.pth',
+        # model_path='training_output_test_2_image/checkpoints/best_model.pth',
+        model_path='training_output_test_2_image/checkpoints/checkpoint_epoch_8.pth',
         use_face_detection=True,
         use_face_only=True,
         visualize_frames_bool=True,
     )
 
     # Predict for an image
-    image_path = r"C:\Users\aaron\Pictures\Screenshots\Screenshot 2024-10-16 111550.png"
+    image_path = r"C:\Users\aaron\Pictures\Screenshots\Screenshot 2024-10-16 111520.png"
     image_results = predictor.predict_image(image_path)
     print("Image Results:", image_results)
 

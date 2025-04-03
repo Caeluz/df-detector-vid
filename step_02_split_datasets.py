@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
-
+__file__
 
 def create_train_val_split(metadata_path, output_path, val_size=0.2):
     """Create train/validation split from existing metadata"""

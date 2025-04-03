@@ -1,10 +1,12 @@
-import os
-import cv2
-import torch
-from tqdm import tqdm
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from torch.utils.data import DataLoader
-from deepfake_data import DeepFakeDataset, DeepFakeDetector
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from tqdm import tqdm
+import torch
+import cv2
+import sys
+import os
+from step_04_deepfake_data import DeepFakeDataset, DeepFakeDetector
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 def evaluate_model(model, test_loader):
@@ -53,7 +55,7 @@ def evaluate_model(model, test_loader):
 
 if __name__ == "__main__":
     # Load the model
-    model_path = 'training_output_2/checkpoints/best_model.pth'
+    model_path = 'training_output_test_1/checkpoints/best_model.pth'
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Using device: {device}")
 

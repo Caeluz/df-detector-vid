@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, average_precision_score, confusion_matrix, roc_curve, auc, classification_report
 from torch.utils.data import DataLoader
-from deepfake_data import DeepFakeDetector, DeepFakeDataset
+from step_04_deepfake_data import DeepFakeDetector, DeepFakeDataset
 from tqdm import tqdm  # Import tqdm for progress bar
 import os
 
 
-def evaluate_model(evaluation_folder):
+def evaluate_model(evaluation_folder, data_type='image'):
     # Create evaluations directory if it doesn't exist
     os.makedirs(evaluation_folder, exist_ok=True)
 
@@ -25,7 +25,7 @@ def evaluate_model(evaluation_folder):
         y_pred = df['Prediction'].values
     else:
         # Step 1: Load the model
-        model_path = 'training_output_2/checkpoints/best_model.pth'
+        model_path = 'training_output_test_1_image/checkpoints/best_model.pth'
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         model = DeepFakeDetector()
         model.load_state_dict(torch.load(model_path, map_location=device))
@@ -33,8 +33,15 @@ def evaluate_model(evaluation_folder):
         model.eval()
 
         # Step 2: Load the test dataset
-        test_metadata_path = 'output_test/test_metadata.csv'  # Path to the metadata file
-        test_dataset = DeepFakeDataset(test_metadata_path)
+        if data_type == 'image':
+            test_metadata_path = 'output_test_1_image/new_test_metadata.csv'
+            test_dataset = DeepFakeDataset(test_metadata_path)
+        elif data_type == 'npy':
+            test_metadata_path = 'output_test_1_image/new_test_metadata.csv'
+            test_dataset = DeepFakeDataset(test_metadata_path, file_type='npy')
+        else:
+            raise ValueError("Unsupported data type. Use 'image' or 'npy'.")
+
         test_loader = DataLoader(
             test_dataset, batch_size=32, shuffle=False, num_workers=4)
 
@@ -152,4 +159,5 @@ def evaluate_model(evaluation_folder):
 
 
 if __name__ == '__main__':
-    evaluate_model(evaluation_folder='evaluations')
+    evaluate_model(evaluation_folder='new_model/evaluations',
+                   data_type='image')

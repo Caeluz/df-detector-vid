@@ -16,22 +16,28 @@ def balance_dataset(metadata_path, output_path, method='oversample'):
     real_videos = df[df['label'] == 1]
     fake_videos = df[df['label'] == 0]
 
+    print(
+        f"Before balancing: Real: {len(real_videos)}, Fake: {len(fake_videos)}")
+
     if method == 'oversample':
         # Oversample real videos
         real_videos_oversampled = resample(real_videos,
                                            replace=True,
                                            n_samples=len(fake_videos),
                                            random_state=42)
-        balanced_df = pd.concat([pd.DataFrame(real_videos_oversampled), fake_videos])
+        balanced_df = pd.concat([real_videos_oversampled, fake_videos])
     elif method == 'undersample':
         # Undersample fake videos
         fake_videos_undersampled = resample(fake_videos,
                                             replace=False,
                                             n_samples=len(real_videos),
                                             random_state=42)
-        balanced_df = pd.concat([real_videos, pd.DataFrame(fake_videos_undersampled)])
+        balanced_df = pd.concat([real_videos, fake_videos_undersampled])
     else:
         raise ValueError("Method should be 'oversample' or 'undersample'")
+
+    print(
+        f"After balancing: Real: {len(balanced_df[balanced_df['label'] == 1])}, Fake: {len(balanced_df[balanced_df['label'] == 0])}")
 
     balanced_df = balanced_df.sample(
         frac=1, random_state=42).reset_index(drop=True)
@@ -50,13 +56,13 @@ def split_dataset(metadata_path, train_output_path, val_output_path, val_size=0.
 
 
 # check_dataset_balance('output_test_1/balanced_metadata.csv')
-# check_dataset_balance('output/balanced_train_metadata.csv')
-# check_dataset_balance('output/balanced_val_metadata.csv')
+check_dataset_balance('output_test_1_image/new_train_metadata.csv')
+check_dataset_balance('output_test_1_image/new_val_metadata.csv')
 
-# balance_dataset('output_test_1/metadata.csv',
-#                 'output_test_1/balanced_metadata.csv', method='oversample')
+balance_dataset('output_test_1_image/new_train_metadata.csv',
+                'output_test_1_image/balanced_new_train_metadata.csv', method='undersample')
 
-# check_dataset_balance('output/balanced_metadata.csv')
+check_dataset_balance('output/balanced_metadata.csv')
 
-split_dataset('output_test_1/balanced_metadata.csv',
-              'output_test_1/balanced_train_metadata.csv', 'output_test_1/balanced_val_metadata.csv', val_size=0.2)
+# split_dataset('output_test_1_image/balanced_metadata.csv',
+#               'output_test_1_image/balanced_train_metadata.csv', 'output_test_1_image/balanced_val_metadata.csv', val_size=0.2)

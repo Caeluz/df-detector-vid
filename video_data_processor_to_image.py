@@ -255,7 +255,8 @@ def main(base_path: str, output_path: str, resume: bool = False):
     image_dirs = {
         'Celeb-real': 1,
         'Celeb-synthesis': 0,
-        'YouTube-real': 1
+        'YouTube-real': 1,
+        'face-forensics-youtube-real': 1, # New dataset
     }
 
     processor = VideoDataProcessor(
@@ -279,4 +280,4 @@ def main(base_path: str, output_path: str, resume: bool = False):
 
 
 if __name__ == "__main__":
-    main('Celeb-DF-v2', 'output_test_1', resume=True)
+    main('Celeb-DF-v2', 'output_test_2_image', resume=True)

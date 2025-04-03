@@ -6,11 +6,19 @@
 /output-2
 /output_test_1
 /output_no_face_test
+/output_test_1_image
 /training_output
+/training_output_test_1
+/training_output_test_1_image
+/training_output_test_2_image
 /training_output_2
 /training_output_no_face
 /output_no_face
 /backend
+
+/test_dataset
+/output_test_2_image
+/output_test_dataset
 
 # Ignore all files that end with .pth
 *.pth

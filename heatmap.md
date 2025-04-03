@@ -37,3 +37,4 @@ The heatmap in your image provides a visual representation of the regions in the
 
 - If the heatmap shows strong activation around the eyes, mouth, or other facial features, it might indicate that the model is detecting anomalies in these areas, which are common in deepfakes.
 - If the heatmap is more uniform or focuses on less critical areas, the model might be less confident in its prediction.
+

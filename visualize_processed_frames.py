@@ -91,7 +91,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Scan and visualize processed frames from metadata.")
     parser.add_argument('--metadata_path', type=str,
-                        default='output_no_face/train_metadata.csv', help='Path to the metadata CSV file.')
+                        default='output_face_test_dataset/test_metadata.csv', help='Path to the metadata CSV file.')
     parser.add_argument('--num_frames', type=int, default=10,
                         help='Number of frames to visualize.')
 

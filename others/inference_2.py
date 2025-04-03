@@ -8,7 +8,7 @@ from typing import Union, List, Tuple, Dict, Optional
 from collections import defaultdict
 import os
 from tqdm import tqdm
-from deepfake_data import DeepFakeDetector
+from step_04_deepfake_data import DeepFakeDetector
 from facenet_pytorch import MTCNN
 
 import matplotlib.pyplot as plt

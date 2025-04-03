@@ -2,7 +2,7 @@
 
 The DeepFake Detection Video project uses a pre-trained model to detect deepfake videos. The model is trained on a dataset of real and fake videos to learn the differences between them. The model uses a technique called deep learning to analyze the videos and identify patterns that indicate whether a video is real or fake.
 
-## [1_video_data_processor.py](/1_video_data_processor.py)
+## [1_video_data_processor.py](/video_data_processor.py)
 
 1. First we would setup and download the datasets from the internet and other sources.
 2. We would put the dataset folders, output folders, if we want to resume the processing of data, if we want to use_face_detection, frame_sampling_rate, and num_workers.
